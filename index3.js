@@ -84,6 +84,7 @@ console.log(frequency.filter(item => item.total > 17))
 
 // console.log(totalEspaco, message.length)
 
+
 const letterScores = {
     ' ': 15, //dec 32 - 20
     'e': 12.702, //dec 101 - hex 65
