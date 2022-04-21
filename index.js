@@ -1,19 +1,14 @@
 const secret = 'MySecret'
-let message = 'Isto99aquilo!!'
+let message = ''//'Isto99aquilo!!'
 let secretCaracterPosition = 0
 
-// var fs = require('fs');
-
-// function readFile(file) {
-//     //file is the location of your file 
-//     fs.readFile(file, 'utf8', (err, data) => {
-//         if (err) throw err;
-//         message = data //console.log(data)
-//         return data; //Data has your text file data 
-//     });
-// }
-
-// readFile('./mensagem.txt')
+var fs = require('fs');
+function readFile(file) {
+    //file is the location of your file 
+    var text = fs.readFileSync(file, 'utf8')
+    return text
+}
+message = readFile('mensagem.txt')
 
 function convertToASCIICode(key) {
     return key.charCodeAt(0)
