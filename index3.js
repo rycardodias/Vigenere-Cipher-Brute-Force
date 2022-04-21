@@ -6,6 +6,42 @@ function convertHexToDecimal(hex) {
     return parseInt(hex, 16)
 }
 
+function compareRows(padding) {
+    //compara os HEX por linha com padding 2 a 2 
+    //- se forem iguais soma ao total de coincidencias da linha
+    let totalMatches = 0
+    for (let i = 0; i < message.length; i += 2) {
+        let msgHex = message[i] + message[i + 1]
+        let paddingHex = message[i + padding] + message[i + padding + 1]
+        if (msgHex === paddingHex)
+            totalMatches += 1
+    }
+    return totalMatches
+}
+
+//cria um array de objetos com a indicação da linha de padding e o total de iguais
+let totalByLine = []
+for (let i = 2; i < message.length; i += 2) {
+    let total = compareRows(i)
+    totalByLine.push({ line: i, total: total })
+}
+
+// cria um array apartir do anterior apenas com as linhas com maior numero de igualdades
+//neste caso valores superiores a 15 combinações iguais por linha
+const greaterNumbers = totalByLine.filter(item => item.total > 15)
+
+//com as comparações finais significativas faço uma média de espaços entre igualdades
+let sumCompare = 0
+for (let i = 0; i < greaterNumbers.length - 1; i++) {
+    sumCompare += greaterNumbers[i + 1].line - greaterNumbers[i].line
+}
+//a média obtida é provavel que seja o tamanho de caracteres do secret
+//é preciso ter em conta que está em HEX, logo o valor é metade em caracteres ASCII
+const secretSize = sumCompare / (greaterNumbers.length - 1)
+console.log(secretSize)
+
+
+// --------------- DESENCRIPTACAO DEPOIS DE SABER O SECRET ---------------- //
 let decryptedMessage = ''
 let secretPosition = 0
 
@@ -24,4 +60,4 @@ for (let i = 0; i < message.length; i += 2) {
     secretPosition += 2
 }
 
-console.log(decryptedMessage)
+// console.log(decryptedMessage)
