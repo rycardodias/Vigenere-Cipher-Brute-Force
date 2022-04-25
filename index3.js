@@ -43,7 +43,7 @@ for (let i = 2; i < message.length; i += 2) {
 // cria um array apartir do anterior apenas com as linhas com maior numero de igualdades
 //neste caso valores superiores a 15 combinações iguais por linha
 const greaterNumbers = totalByLine.filter(item => item.total > 15)
-
+console.log(greaterNumbers)
 //com as comparações finais significativas faço uma média de espaços entre igualdades
 let sumCompare = 0
 for (let i = 0; i < greaterNumbers.length - 1; i++) {
